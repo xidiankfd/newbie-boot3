@@ -5,16 +5,16 @@ springdoc:
 spring:
   # 数据源配置
   datasource:
-    #    ==============Mysql==============
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/newbie3?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8&allowMultiQueries=true
-    username: root
-    password: root
-    #    ==============Pgsql==============
-    #    driver-class-name: org.postgresql.Driver
-    #    url: jdbc:postgresql://localhost:5432/user_JNcKh5
-    #    username: postgresql
-    #    password: postgresql
+#    #    ==============Mysql==============
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/newbie3?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8&allowMultiQueries=true
+#    username: root
+#    password: root
+#        ==============Pgsql==============
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/postgres
+        username: postgres
+        password: postgres
     #    ==============Oracle==============
     #    driverClassName: oracle.jdbc.driver.OracleDriver
     #    url: jdbc:oracle:thin:@localhost:1521/orcl
@@ -43,15 +43,15 @@ newbie:
     timeout: 60 #超时（单位：秒）
   # 文件服务配置
   file:
-    scheme: default # * default：服务器本地磁盘文件存储，minio：使用minio
+    scheme: minio # * default：服务器本地磁盘文件存储，minio：使用minio
     prefix: public # 文件访问前缀
     # 本服务器文件保存磁盘地址
     file-location: D:/project/upload
     # minio
     minio:
       end-point: http://localhost:9000
-      access-key: upaGr2JF0uGD7dxpLzqM
-      secret-key: NZvAgDfqr58OvcUrW9G942kmv4MSX40QTIuxTX0f
+      access-key: minioadmin
+      secret-key: minioadmin
       bucket: files
 sa-token:
   #  白名单
