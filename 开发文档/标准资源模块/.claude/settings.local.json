@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/WorkSpace/idea/newbie-boot3/newbie-common/src/main/java/com/newbie/common/domain/entity/**)",
+      "Read(//d/WorkSpace/idea/newbie-boot3/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

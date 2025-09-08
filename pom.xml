@@ -22,6 +22,8 @@
         <module>newbie-system</module>
         <!-- 文件服务 -->
         <module>newbie-file</module>
+        <!-- 标准资源管理 -->
+        <module>newbie-standard</module>
         <!-- 后台接口 -->
         <module>newbie-admin</module>
         <!-- web日志服务  -->
@@ -63,6 +65,11 @@
             <dependency>
                 <groupId>com.newbie</groupId>
                 <artifactId>newbie-file</artifactId>
+                <version>${newbie.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newbie</groupId>
+                <artifactId>newbie-standard</artifactId>
                 <version>${newbie.version}</version>
             </dependency>
             <dependency>

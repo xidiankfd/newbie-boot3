@@ -38,6 +38,10 @@
         </dependency>
         <dependency>
             <groupId>com.newbie</groupId>
+            <artifactId>newbie-standard</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.newbie</groupId>
             <artifactId>newbie-weblog</artifactId>
         </dependency>
         <dependency>
