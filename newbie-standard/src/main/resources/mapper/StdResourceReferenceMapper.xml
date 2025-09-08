@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newbie.standard.mapper.StdResourceReferenceMapper">
+
+    <!-- 根据资源ID查询引用关系列表 -->
+    <select id="selectByResourceId" resultType="com.newbie.standard.domain.entity.StdResourceReference">
+        SELECT * FROM std_resource_reference 
+        WHERE resource_id = #{resourceId} 
+        AND deleted = 0
+        ORDER BY sort_order ASC, create_time DESC
+    </select>
+
+    <!-- 根据引用类型查询引用关系列表 -->
+    <select id="selectByResourceIdAndType" resultType="com.newbie.standard.domain.entity.StdResourceReference">
+        SELECT * FROM std_resource_reference 
+        WHERE resource_id = #{resourceId} 
+        AND reference_type = #{referenceType}
+        AND deleted = 0
+        ORDER BY sort_order ASC, create_time DESC
+    </select>
+
+    <!-- 查询引用了指定资源的其他标准 -->
+    <select id="selectByReferenceId" resultType="com.newbie.standard.domain.entity.StdResourceReference">
+        SELECT * FROM std_resource_reference 
+        WHERE reference_id = #{referenceId} 
+        AND deleted = 0
+        ORDER BY sort_order ASC, create_time DESC
+    </select>
+
+    <!-- 根据资源ID和排序查询引用关系列表 -->
+    <select id="selectByResourceIdOrderBySort" resultType="com.newbie.standard.domain.entity.StdResourceReference">
+        SELECT * FROM std_resource_reference 
+        WHERE resource_id = #{resourceId} 
+        AND deleted = 0
+        ORDER BY sort_order ASC, create_time DESC
+    </select>
+
+    <!-- 统计资源的引用数量 -->
+    <select id="countByResourceIdAndType" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM std_resource_reference 
+        WHERE resource_id = #{resourceId} 
+        AND reference_type = #{referenceType}
+        AND deleted = 0
+    </select>
+
+</mapper>

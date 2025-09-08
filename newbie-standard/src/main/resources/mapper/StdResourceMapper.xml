@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newbie.standard.mapper.StdResourceMapper">
+
+    <select id="selectByResourceCode" resultType="com.newbie.standard.domain.entity.StdResource">
+        SELECT * FROM std_resource 
+        WHERE resource_code = #{resourceCode} 
+        AND deleted = 0
+    </select>
+
+    <select id="selectByStatus" resultType="com.newbie.standard.domain.entity.StdResource">
+        SELECT * FROM std_resource 
+        WHERE standard_status = #{standardStatus} 
+        AND deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectByField" resultType="com.newbie.standard.domain.entity.StdResource">
+        SELECT * FROM std_resource 
+        WHERE standard_field = #{standardField} 
+        AND deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectByClassification" resultType="com.newbie.standard.domain.entity.StdResource">
+        SELECT * FROM std_resource 
+        WHERE standard_classification = #{standardClassification} 
+        AND deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectByConditions" resultType="com.newbie.standard.domain.entity.StdResource">
+        SELECT * FROM std_resource 
+        WHERE deleted = 0
+        <if test="resource.resourceCode != null and resource.resourceCode != ''">
+            AND resource_code LIKE CONCAT('%', #{resource.resourceCode}, '%')
+        </if>
+        <if test="resource.chineseName != null and resource.chineseName != ''">
+            AND chinese_name LIKE CONCAT('%', #{resource.chineseName}, '%')
+        </if>
+        <if test="resource.standardStatus != null and resource.standardStatus != ''">
+            AND standard_status = #{resource.standardStatus}
+        </if>
+        <if test="resource.standardField != null and resource.standardField != ''">
+            AND standard_field = #{resource.standardField}
+        </if>
+        <if test="resource.standardClassification != null and resource.standardClassification != ''">
+            AND standard_classification = #{resource.standardClassification}
+        </if>
+        ORDER BY create_time DESC
+    </select>
+
+</mapper>

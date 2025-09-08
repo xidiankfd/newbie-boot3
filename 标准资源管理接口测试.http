@@ -1,0 +1,125 @@
+# 标准资源管理接口测试文档
+
+### 获取验证码
+GET http://localhost:8080/security/imageCaptcha
+Content-Type: application/json
+
+### 用户登录 (需要先获取验证码，然后手动输入验证码)
+# POST http://localhost:8080/security/login
+# Content-Type: application/json
+# 
+# {
+#   "utext": "dGVzdA==",
+#   "ptext": "MTIzNDU2",
+#   "checkCodeKey": "从上一步获取的验证码key",
+#   "checkCode": "手动输入验证码"
+# }
+
+### 测试标准资源管理接口 (需要先获取token)
+
+### 1. 分页查询标准资源列表
+GET http://localhost:8080/standard/resource/page?current=1&size=10
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### 2. 新增第一条标准资源数据
+POST http://localhost:8080/standard/resource/add
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "resourceCode": "GB/T 14396-2024",
+  "chineseName": "医疗机构信息化建设标准规范",
+  "englishName": "Healthcare Institution Informatization Standards",
+  "standardStatus": "现行",
+  "standardType": "国家标准",
+  "standardNature": "推荐性",
+  "publishOrganization": "国家卫生健康委员会",
+  "publishDate": "2024-01-15",
+  "implementDate": "2024-06-01",
+  "competentUnit": "全国卫生信息化技术委员会",
+  "ccsCode": "C50",
+  "icsCode": "35.240.80",
+  "hasPatentInfo": false,
+  "notes": "用于规范医疗机构信息化建设的基础标准",
+  "scopeSummary": "适用于各级医疗机构信息化系统的规划、设计、开发和实施",
+  "keywords": "医疗信息化,标准规范,系统建设",
+  "standardField": "医疗",
+  "standardClassification": "接口规范"
+}
+
+### 3. 新增第二条标准资源数据
+POST http://localhost:8080/standard/resource/add
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "resourceCode": "WS/T 500-2024",
+  "chineseName": "电子病历数据元标准",
+  "englishName": "Electronic Medical Record Data Elements Standard",
+  "standardStatus": "即将实施",
+  "standardType": "行业标准",
+  "standardNature": "推荐性", 
+  "publishOrganization": "国家卫生健康委员会",
+  "publishDate": "2024-03-01",
+  "implementDate": "2024-09-01",
+  "competentUnit": "医疗卫生信息标准化委员会",
+  "ccsCode": "C59",
+  "icsCode": "35.240.80",
+  "hasPatentInfo": false,
+  "notes": "规范电子病历数据元的定义和使用",
+  "scopeSummary": "适用于各类电子病历系统的数据元标准化",
+  "keywords": "电子病历,数据元,标准化",
+  "standardField": "医疗",
+  "standardClassification": "数据元"
+}
+
+### 4. 根据ID查询标准资源详情 (需要先获取实际ID)
+GET http://localhost:8080/standard/resource/{{resourceId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### 5. 根据标准编号查询标准资源
+GET http://localhost:8080/standard/resource/code/GB/T 14396-2024
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### 6. 根据标准状态查询标准资源列表
+GET http://localhost:8080/standard/resource/listByStatus?standardStatus=现行
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### 7. 根据标准领域查询标准资源列表
+GET http://localhost:8080/standard/resource/listByField?standardField=医疗
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### 8. 根据标准分类查询标准资源列表
+GET http://localhost:8080/standard/resource/listByClassification?standardClassification=数据元
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### 9. 获取标准状态选项
+GET http://localhost:8080/standard/resource/statusOptions
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### 10. 获取标准领域选项
+GET http://localhost:8080/standard/resource/fieldOptions
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### 11. 批量删除标准资源 (删除第一条数据，需要先获取实际ID)
+POST http://localhost:8080/standard/resource/deleteBatch
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+["{{resourceId1}}"]
+
+### 测试步骤说明：
+# 1. 首先运行获取验证码接口
+# 2. 复制返回的checkCodeKey
+# 3. 查看验证码图片，输入验证码
+# 4. 运行登录接口获取token
+# 5. 将token填入上面的{{token}}位置
+# 6. 按顺序执行标准资源管理接口测试

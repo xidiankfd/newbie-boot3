@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newbie.standard.mapper.StdTerminologyMapper">
+
+    <!-- 根据资源ID查询术语列表 -->
+    <select id="selectByResourceId" resultType="com.newbie.standard.domain.entity.StdTerminology">
+        SELECT * FROM std_terminology 
+        WHERE resource_id = #{resourceId} 
+        AND deleted = 0
+        ORDER BY sort_order ASC, create_time DESC
+    </select>
+
+    <!-- 根据术语分类查询术语列表 -->
+    <select id="selectByResourceIdAndCategory" resultType="com.newbie.standard.domain.entity.StdTerminology">
+        SELECT * FROM std_terminology 
+        WHERE resource_id = #{resourceId} 
+        AND term_category = #{termCategory}
+        AND deleted = 0
+        ORDER BY sort_order ASC, create_time DESC
+    </select>
+
+    <!-- 根据术语名称查询术语 -->
+    <select id="selectByTermName" resultType="com.newbie.standard.domain.entity.StdTerminology">
+        SELECT * FROM std_terminology 
+        WHERE term_name = #{termName}
+        AND deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 根据资源ID和排序查询术语列表 -->
+    <select id="selectByResourceIdOrderBySort" resultType="com.newbie.standard.domain.entity.StdTerminology">
+        SELECT * FROM std_terminology 
+        WHERE resource_id = #{resourceId} 
+        AND deleted = 0
+        ORDER BY sort_order ASC, create_time DESC
+    </select>
+
+    <!-- 获取术语分类列表 -->
+    <select id="selectCategoriesByResourceId" resultType="java.lang.String">
+        SELECT DISTINCT term_category FROM std_terminology 
+        WHERE resource_id = #{resourceId} 
+        AND deleted = 0
+        AND term_category IS NOT NULL
+        ORDER BY term_category ASC
+    </select>
+
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newbie.standard.mapper.StdInterpretationMapper">
+
+    <!-- 根据资源ID查询解读信息列表 -->
+    <select id="selectByResourceId" resultType="com.newbie.standard.domain.entity.StdInterpretation">
+        SELECT * FROM std_interpretation 
+        WHERE resource_id = #{resourceId} 
+        AND deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 根据来源类型查询解读信息列表 -->
+    <select id="selectByResourceIdAndSourceType" resultType="com.newbie.standard.domain.entity.StdInterpretation">
+        SELECT * FROM std_interpretation 
+        WHERE resource_id = #{resourceId} 
+        AND source_type = #{sourceType}
+        AND deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 查询官方解读信息列表 -->
+    <select id="selectOfficialByResourceId" resultType="com.newbie.standard.domain.entity.StdInterpretation">
+        SELECT * FROM std_interpretation 
+        WHERE resource_id = #{resourceId} 
+        AND is_official = 1
+        AND deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 更新查看次数 -->
+    <update id="incrementViewCount">
+        UPDATE std_interpretation 
+        SET view_count = IFNULL(view_count, 0) + 1
+        WHERE id = #{id}
+    </update>
+
+    <!-- 统计资源的解读数量 -->
+    <select id="countByResourceId" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM std_interpretation 
+        WHERE resource_id = #{resourceId} 
+        AND deleted = 0
+    </select>
+
+    <!-- 根据标题模糊查询解读信息 -->
+    <select id="selectByTitleLike" resultType="com.newbie.standard.domain.entity.StdInterpretation">
+        SELECT * FROM std_interpretation 
+        WHERE source_title LIKE CONCAT('%', #{title}, '%')
+        AND deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+</mapper>

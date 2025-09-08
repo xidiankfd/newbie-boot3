@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newbie.standard.mapper.StdResourceAttachmentMapper">
+
+    <!-- 根据资源ID查询附件列表 -->
+    <select id="selectByResourceId" resultType="com.newbie.standard.domain.entity.StdResourceAttachment">
+        SELECT * FROM std_resource_attachment 
+        WHERE resource_id = #{resourceId} 
+        AND deleted = 0
+        ORDER BY is_main_file DESC, create_time DESC
+    </select>
+
+    <!-- 根据资源ID查询主文件 -->
+    <select id="selectMainFileByResourceId" resultType="com.newbie.standard.domain.entity.StdResourceAttachment">
+        SELECT * FROM std_resource_attachment 
+        WHERE resource_id = #{resourceId} 
+        AND is_main_file = 1
+        AND deleted = 0
+        ORDER BY create_time DESC
+        LIMIT 1
+    </select>
+
+    <!-- 根据附件类型查询附件列表 -->
+    <select id="selectByTypeAndResourceId" resultType="com.newbie.standard.domain.entity.StdResourceAttachment">
+        SELECT * FROM std_resource_attachment 
+        WHERE resource_id = #{resourceId} 
+        AND attachment_type = #{attachmentType}
+        AND deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 统计资源的附件数量 -->
+    <select id="countByResourceId" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM std_resource_attachment 
+        WHERE resource_id = #{resourceId} 
+        AND deleted = 0
+    </select>
+
+</mapper>
