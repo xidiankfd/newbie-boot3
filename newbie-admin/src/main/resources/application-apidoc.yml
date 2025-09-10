@@ -1,14 +1,18 @@
 # springdoc-openapi项目配置
 springdoc:
-  group-configs:
-    - group: '文件服务'
-#      paths-to-match: '/file/**'
-      packages-to-scan: com.newbie.controller.file
-    - group: '系统管理'
-      packages-to-scan: com.newbie.controller.system
-    - group: '安全控制'
-      packages-to-scan: com.newbie.controller.security
+  # 修改: 移除YAML分组配置，改用Java配置类管理API分组  2024-09-09
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
 
 # knife4j的增强配置，不需要增强可以不配
 knife4j:
-  enable: false
+  enable: true  # 修改: 启用Knife4j以便API测试  2024-09-09
+  setting:
+    language: zh_cn  # 新增: 设置中文界面  2024-09-09
+    enable-version: true  # 新增: 启用版本控制  2024-09-09

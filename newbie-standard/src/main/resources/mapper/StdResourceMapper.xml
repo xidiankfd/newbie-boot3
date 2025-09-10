@@ -4,34 +4,30 @@
 
     <select id="selectByResourceCode" resultType="com.newbie.standard.domain.entity.StdResource">
         SELECT * FROM std_resource 
-        WHERE resource_code = #{resourceCode} 
-        AND deleted = 0
+        WHERE resource_code = #{resourceCode}
     </select>
 
     <select id="selectByStatus" resultType="com.newbie.standard.domain.entity.StdResource">
         SELECT * FROM std_resource 
-        WHERE standard_status = #{standardStatus} 
-        AND deleted = 0
+        WHERE standard_status = #{standardStatus}
         ORDER BY create_time DESC
     </select>
 
     <select id="selectByField" resultType="com.newbie.standard.domain.entity.StdResource">
         SELECT * FROM std_resource 
-        WHERE standard_field = #{standardField} 
-        AND deleted = 0
+        WHERE standard_field = #{standardField}
         ORDER BY create_time DESC
     </select>
 
     <select id="selectByClassification" resultType="com.newbie.standard.domain.entity.StdResource">
         SELECT * FROM std_resource 
-        WHERE standard_classification = #{standardClassification} 
-        AND deleted = 0
+        WHERE standard_classification = #{standardClassification}
         ORDER BY create_time DESC
     </select>
 
     <select id="selectByConditions" resultType="com.newbie.standard.domain.entity.StdResource">
         SELECT * FROM std_resource 
-        WHERE deleted = 0
+        WHERE 1=1
         <if test="resource.resourceCode != null and resource.resourceCode != ''">
             AND resource_code LIKE CONCAT('%', #{resource.resourceCode}, '%')
         </if>
