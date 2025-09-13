@@ -9,6 +9,7 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springdoc.core.models.GroupedOpenApi;
+import org.springframework.beans.factory.annotation.Value;  // 新增: 用于读取配置端口  2024-09-13
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,6 +26,9 @@ public class OpenApiConfig {
 
     private static final String SECURITY_SCHEME_NAME = "Bearer Authentication";
 
+    @Value("${server.port:8080}")  // 新增: 从配置读取端口号，默认8080  2024-09-13
+    private String serverPort;
+
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
@@ -39,7 +43,7 @@ public class OpenApiConfig {
                                 .name("Apache 2.0")
                                 .url("https://www.apache.org/licenses/LICENSE-2.0")))
                 .servers(List.of(
-                        new Server().url("http://localhost:8080").description("开发环境"),
+                        new Server().url("http://localhost:" + serverPort).description("开发环境"),  // 修改: 动态获取配置端口  2024-09-13
                         new Server().url("https://api.newbie.com").description("生产环境")
                 ))
                 .components(new Components()
